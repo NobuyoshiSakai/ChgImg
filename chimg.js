@@ -1,6 +1,6 @@
 var suu = 0; // 画像表示数
 var sec = 0; // 画像表示秒数
-var max = 3; // ファイル名最大数(直書きオンリー)
+var max = 11; // ファイル名最大数(直書きオンリー)
 var doc = document;
 var imgOrder = [];
 /**
@@ -42,23 +42,6 @@ function checkSec(){
 	return ans;
 }
 /**
- * N秒スリープするタイマー
- */
-function timer(fileName){
-
-	// 現在時刻を取得する
-	var src = new Date();
-	// N秒スリープするタイマー
-	for(;;){
-		var dst = new Date();
-		var diff = dst.getTime() - src.getTime();
-		if(sec * 1000 < diff){
-			//alert('非同期描画がまだできていない');
-			break;
-		}
-	}
-}
-/**
  * valueを取得する
  */
 function getVal(id){
@@ -88,6 +71,12 @@ function showImg(fileName){
 
 	if(fileName){
 		imgDiv.innerHTML = '<img border="1" src="./img/'+ fileName +'" width="300" height="300" alt="'+fileName+'">';
+	} else {
+		var i=0;
+		for(;i<imgOrder.length;i++){
+			var fileTag = '<img border="1" src="./img/'+ imgOrder[i] +'" width="100" height="100" alt="'+imgOrder[i]+'">'
+			imgDiv.innerHTML += fileTag;
+		}
 	}
 }
 /**
@@ -101,6 +90,43 @@ function getFileName(){
 	return fileName;
 }
 /**
+ * 画面に表示する、画像の一覧を作成する
+ */
+function createFileNameList(){
+	imgOrder = [];
+	var i=0;
+	var imgFileName;
+	var imgOldName;
+	for(;i<suu; i++){
+
+		// 前後で同じ画像が設定されると、切り目がわからなくなるため、前後で同じにならないようにする
+		do{
+			imgFileName = getFileName();
+		} while(imgFileName == imgOldName)
+
+		imgOldName = imgFileName;
+		imgOrder.push(imgFileName);
+	}
+}
+/**
+ * 画面に順に、画像を表示する
+ */
+var slideid;
+var cnt=0;
+function showAll(){
+	if(cnt < suu){
+		console.log(imgOrder[cnt]);
+
+		// 画像を表示する
+		showImg(imgOrder[cnt]);
+		cnt++;
+	} else {
+		// 画像の一覧を表示する
+		showImg('');
+		clearInterval(slideid);
+	}
+}
+/**
  * 処理開始
  */
 function startChgImg(){
@@ -109,27 +135,15 @@ function startChgImg(){
 	sec = getVal('sec');
 
 	// 値のチェックを実施する。チェックできなかった場合は、エラー終了とする
-	if(checkSec() && checkSuu()){
-
-	} else {
+	if(checkSec() == false || checkSuu() == false){
 		alert('入力値に不整合があります。');
 		return false;
 	}
 
 	// 画面表示する画像の順番を作成する
-	imgOrder = [];
-	var i=0;
-	for(;i<suu; i++){
-		var imgFileName = getFileName();
-		imgOrder.push(imgFileName);
-	}
-	// 画面に画像を表示する
-	for(i=0;i<imgOrder.length; i++){
-		//var fnc = showImg(imgOrder[i]);
-		//var fnc = function(){alert('run setTimeout()');}
-		var fnc = function(){showImg(imgOrder[i]);}
-		setTimeout(fnc, 1);
-		timer(imgOrder[i]);
-	}
-	showImg('');
+	createFileNameList();
+
+	// 画像を順に表示する
+	cnt=0;
+	slideid = setInterval("showAll()",sec * 1000);
 }
