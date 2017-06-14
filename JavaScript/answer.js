@@ -81,9 +81,11 @@ function setAnswer(questionNo, isRight){
   tdObj.style.visibility = 'visible';
   if(isRight){
     // alert("正解");
+    tdObj.innerHTML += "<br>" + maruObj;
     right_cnt += 1;
   } else {
     // alert("不正解");
+    tdObj.innerHTML += "<br>" + batsuObj;
   }
   // ------------------------------------------------
   // 新しい問題を作成する
