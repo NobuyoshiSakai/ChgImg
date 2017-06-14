@@ -2,7 +2,11 @@
 <html>
 <head>
 	<meta charset='utf-8' />
-	<script type="text/javascript" src="./chimg.js"></script>
+	<script type="text/javascript" src="./JavaScript/global.js"></script>
+	<script type="text/javascript" src="./JavaScript/util.js"></script>
+	<script type="text/javascript" src="./JavaScript/start.js"></script>
+	<script type="text/javascript" src="./JavaScript/answer.js"></script>
+	<title>記憶力テスト</title>
 </head>
 <body>
 	<table>
@@ -15,7 +19,10 @@
 			<td><input type="text"   id="suu" value="5"   size="3" maxlength="3" style="text-align:right"/> 枚</td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="button" value="スタート" onclick="startChgImg();"/></td>
+			<td colspan="2">
+				<input type="button" value="スタート" onclick="startChgImg();"/>
+				<input type="button" value="回答" onclick="answer();"/>
+			</td>
 		</tr>
 	</table>
 	<hr>

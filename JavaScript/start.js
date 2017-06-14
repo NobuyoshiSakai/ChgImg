@@ -1,15 +1,6 @@
 var suu = 0; // 画像表示数
 var sec = 0; // 画像表示秒数
-var max = 11; // ファイル名最大数(直書きオンリー)
-var doc = document;
-var imgOrder = [];
-/**
- * 画像名称の最大値を取得する
- * (画像名称は必ず 数字.png であることが前提)
- */
-function getMax(){
-	alert('未実装');
-}
+
 /**
  * 画像表示数チェック
  * true:正常
@@ -42,41 +33,20 @@ function checkSec(){
 	return ans;
 }
 /**
- * valueを取得する
- */
-function getVal(id){
-	var val = "";
-	var obj = doc.getElementById(id);
-	if(obj && obj.value){
-		val = obj.value;
-	}
-	return val;
-}
-/**
- * 小数点n位までを残す関数
- * number=対象の数値
- * n=残したい小数点以下の桁数
- */
-function floatFormat( number, n ) {
-	var _pow = Math.pow( 10 , n ) ;
-
-	return Math.round( number * _pow ) / _pow ;
-}
-/**
  * Divに画像を描画する
  */
 function showImg(fileName){
-	var imgDiv = doc.getElementById('img');
+	var imgDiv = document.getElementById('img');
 	imgDiv.innerHTML = '';
 
 	if(fileName){
 		imgDiv.innerHTML = '<img border="1" src="./img/'+ fileName +'" width="300" height="300" alt="'+fileName+'">';
 	} else {
-		var i=0;
-		for(;i<imgOrder.length;i++){
-			var fileTag = '<img border="1" src="./img/'+ imgOrder[i] +'" width="100" height="100" alt="'+imgOrder[i]+'">'
-			imgDiv.innerHTML += fileTag;
-		}
+		//var i=0;
+		//for(;i<imgOrder.length;i++){
+		//	var fileTag = '<img border="1" src="./img/'+ imgOrder[i] +'" width="100" height="100" alt="'+imgOrder[i]+'">'
+		//	imgDiv.innerHTML += fileTag;
+		//}
 	}
 }
 /**
