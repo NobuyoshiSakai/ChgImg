@@ -50,16 +50,6 @@ function showImg(fileName){
 	}
 }
 /**
- * ファイル名を作成する
- */
-function getFileName(){
-	var n = 10;
-	if(max >= 10) n = 100;
-	var kari = floatFormat(Math.random() * n, 0);
-	var fileName = ((kari % max) + 1) + ".png";
-	return fileName;
-}
-/**
  * 画面に表示する、画像の一覧を作成する
  */
 function createFileNameList(){

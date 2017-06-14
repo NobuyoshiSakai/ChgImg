@@ -19,3 +19,13 @@ function floatFormat( number, n ) {
 
 	return Math.round( number * _pow ) / _pow ;
 }
+/**
+ * ファイル名を作成する
+ */
+function getFileName(){
+	var n = 10;
+	if(max >= 10) n = 100;
+	var kari = floatFormat(Math.random() * n, 0);
+	var fileName = ((kari % max) + 1) + ".png";
+	return fileName;
+}
