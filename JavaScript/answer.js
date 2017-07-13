@@ -113,7 +113,7 @@ function setAnswer(questionNo, isRight){
       tdObj.innerHTML = imgTag;
     }
   } else {
-    alert("問題数 " + imgOrder.length + " のうち\n正解は " + right_cnt + " でした。");
+    //alert("問題数 " + imgOrder.length + " のうち\n正解は " + right_cnt + " でした。");
   }
 }
 /**
